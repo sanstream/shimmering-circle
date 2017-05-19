@@ -1,0 +1,23 @@
+{
+  "name": "shimmering-circle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "creative",
+    "coding",
+    "art",
+    "svg",
+    "circles",
+    "arc",
+    "d3"
+  ],
+  "author": "Sanne Peters <sanne@sanstream.nl> (http://www.sanstream.nl)",
+  "license": "custom",
+  "dependencies": {
+    "d3": "^3.5.17"
+  }
+}
