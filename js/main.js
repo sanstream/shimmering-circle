@@ -1,7 +1,7 @@
 function ShimmeringCircle(svgEl, radius) {
 
   this.colours = {
-    background: '#212121',
+    background: '#222222',
     glow: '#ff0d00'
   };
   this.tmplData = [];
@@ -16,9 +16,9 @@ function ShimmeringCircle(svgEl, radius) {
   self.svgEl = svgEl;
   self.tau = 2 * Math.PI;
   self.tauInDegrees = 360;
-  self.timing = 5000;
-  self.cycleTime = self.timing * 0.66;
-  self.maxActiveArcs = 4;
+  self.timing = 3000;
+  self.cycleTime = self.timing * 0.5;
+  self.maxActiveArcs = 3;
 
     self.edge = (self.radius + ( 0.1* self.radius )) * 2;
 
@@ -47,12 +47,10 @@ ShimmeringCircle.prototype = {
       }
     });
 
-    self.activateArcs();
+    // self.activateArcs();
 
     self.slices = self.svgEl.selectAll('path').data(self.arcs).enter().append('path')
-      .style('fill', function(d){
-        return d.glow;
-      })
+      .style('fill', self.colours.background)
       .attr('stroke', self.colours.background)
       .attr('stroke-width', 1)
       .attr('d', self.arcDims);
@@ -68,17 +66,19 @@ ShimmeringCircle.prototype = {
 
   updateSlices: function () {
 
-    var self = this;
-    window.setInterval(function () {
-
+    var cycle = function () {
       self.activateArcs();
-      self.slices.data(self.  arcs).transition()
+      self.slices.data(self.arcs).transition()
         .duration(self.timing)
+        .ease('quad-in-out')
         .style('fill', function (d){
           return d.glow;
         });
-    }, self.cycleTime);
+    };
 
+    var self = this;
+    cycle();
+    window.setInterval(cycle, self.cycleTime);
   }
 };
 
